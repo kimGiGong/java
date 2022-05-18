@@ -1,0 +1,166 @@
+[day02]
+
+		public : 접근지정자 : 완전공개
+		 
+		 class 	: 클래스 만들때 사용하는 키워드
+		 		  	자바는 클래스들로 구성되어있다. 자바의 최소 단위.
+		 		  	클래스 바깥에는 코드 작성X (예외 package, import)
+		 		  	
+		 Test04	: 클래스 이름 : 첫글자 대문자로 만들기 (변수와 구분)
+		 		  	> 이클립스에서 파일생성시 Name에 이름작성하면
+		 		  	이것이 클래스의 이름이 되고, 파일생성시 첫글자 대문자로 작성
+		 		  클래스 명명규칙 : 첫글자 대문자, 띄어쓰기X , 한글 ,
+		 		  	특수기호 _ $ 만 허용, 키워드X, 대소문자 구분 (Num != num)
+		 		  	패키지 안에서는 같은이름의 클래스가 있을 수 없다.
+		 		  	
+		 static	: 전역 키워드 : 나중
+		 
+		 void	: 리턴타입 중 하나로 리턴할 값 없다. 
+		 
+		 main	: 메소드 이름 : 메인메소드는 프로그램이 시작되면 (ctrl+F11)
+		 						가장먼저 자동으로 실행되는 메소드.
+		 						메인메소드 종료시 프로그램도 종료
+		 						프로그램내에 반드시 하나만 존재해야함.
+		 
+		 (String[] args) : 매개변수 : 나중
+		 
+
+1. 변수의 사용
+	1) 접미사
+		리터럴값 뒤에 데이터 타입을 명시해주는 방법 (float f = 10F;)
+		
+	2)기본값
+		boolean	: false
+		char 	: ' ' 'u\0000'
+		int 	: 0
+		double	: 0.0
+		참조형 	: null (String)
+
+2. 출력문 : 콘솔에 출력하는 명령문 : 개발자가 확인용으로 많이 사용
+	
+	1) 종류
+	System.out.println();		: 엔터기능 O
+	System.out.print();		: 엔터기능 X 
+	System.out.printf();		: 엔터기능 X , 값을 출력할때 서식문자를 사용해야함
+
+	int a = 100;
+	System.out.println(a);	===> 100
+	System.out.print(a);		===> 100
+	System.out.printf("%d", a); 	===> 100
+
+	2) 출력문 내 연산
+		숫자 + 숫자 	=> 더한 결과 출쳑
+		"문자열" + "문자열" => 문자로 연결된 문자열 출력
+		"문자열" + 숫자 	=> 문자로 연결된 문자열 출력
+		'문자' + 숫자 	=> 문자의 아스키코드값 + 숫자 결과값 숫자 출력
+	3)이스케이프 문자
+		: 출력문 내에서 사용되며 , 어떠한 기능을 가지고 있는 특수문자
+		(홀따옴표나 겹따옴표 안에 작성)
+
+		\n	:줄바꿈
+		\t	:탭간격 주기 
+		\"	:쌍따옴표
+		\'	:홀따옴표
+		\\	:역슬래쉬
+
+3. 형변환 Casting, Type Conversion, Converting
+
+	boolean 제외한 다른 타입들을 변환시키는 것.
+
+	(타입)변수
+
+	char < int    < long 
+	       < float < double
+	
+	1) 강제형변환 (다운캐스팅 ,디모션) : 큰타입 -> 작은타입 : 형변환 공식 적는다.
+		int a = 300;
+
+		byte b= a; 	==> error!!
+		byte b = (byte)a; 	==> 문법적으로 Error는 안나지만, 값이 깨져있다.
+	
+		double d = 1.5;
+		int i = d; 		=> i = 1 
+
+		(int)3.5 + 4 => 7
+		(double)4 + 4 = 8.000000
+		4.0 + 4		
+		4.0 + 4.0 ---> 8.0
+
+	2) 자동형변환 (업캐스팅, 프로모션) : 작은타입 -> 큰타입 : 형변환 공식 생략가능.
+		
+		double d = 3.14 * 10;	==> 31.4
+			   3.14 * 10.0	==> 31.4		
+	
+		5 + 3.5 	=> 8.5
+		5 / 2 	=> 2
+		int / int 	=> int
+	
+		byte b = 127;
+		int i = 100;
+		System.out.println(b+i);		//  	227
+		System.out.println(10/4);		//	2
+		System.out.println(10.0 /4);		//	2.5
+		System.out.println((byte)(b+i));		//	-29 오버플로우
+		System.out.println((int)2.9+1.8);	//	3.8
+		System.out.println((int)(2.9+1.8));	//	4
+		System.out.println((int)2.9+(int)1.8);	//	3
+
+
+
+4. 입력문
+	1) Scanner : 자바패키지에서 제공하는 클래스. 입력받을 때 사용.
+	
+		#1. import 문 사용 
+			자바 파일 최상단 package....; 명령문 밑에 작성
+			import java.util.Scanner;
+	
+		(2 ~ 4는 main 안에 작성)
+		#2. Scanner 객체생성 
+			
+			Scanner sc = new Scanner(System.in);
+
+		#3. 입력받기 (받고싶은 만큼 메소드 작성)
+
+			String 변수 = sc.nextLine();
+
+		#4. Scanner 객체 닫기 (메모리누수 방지)
+
+			sc.close();
+
+		
+		
+		String -> int 변환
+			Intager.parseInt(String타입변수or"값");
+		String -> double 변환
+			double 변수 = Double.parseDouble(String타입변수or"값");
+		String -> float 변환
+			float 변수명 = Float.parseFloat(String타입변수or"값");
+		String -> boolean 변환
+			boolean 변수명 = Boolean.parseBoolean(String타입변수or"값");
+			
+		int -> String 변환
+			String 변수 = Integer.toString(int타입변수);
+
+
+		// 카멜표기법
+		int myNumber;
+		int yourNumber;
+		int currPostion;
+		
+		//스네이크 표기법
+		int my_number;
+		int your_number;
+		int curr_postion;
+
+
+
+
+
+
+
+
+
+
+
+
+

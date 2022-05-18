@@ -1,0 +1,71 @@
+[day11]
+
+1. 상속 inheritance
+	1) 클래스와 클래스 사이( 1 : 1 ) 의 부모자식 관계를 만듬.
+	2) 자바 다중상속X
+	3) 상속은 부모의 변수, 메소드들을 물려받는것.
+	4) 상속시, 생성자와 초기화 블럭은 제외
+	5) 상속 키워드 : extends
+	6) 필요한 이유 : 코드 중독 제거 -> 클래스 간결하게 구현,유지보수 편함
+				 소프트웨어 생산성 향상.
+	
+		부모 클래스 = super = parent = base
+		자식 클래스 = sub = child = derived
+			
+		class Object { }			//  조상님	 : 이름바꿀없고 모든 클래스가(extends없이) 상속받는다.
+		class Parent { } 			//  할아버지 할머니	: x
+		class Child extends Parent { }		//  아빠 엄마 	: x, y
+		class Child2 extends Parent { }		//  삼촌? = 남	
+		class GrandChild extends Child { }	//  아들		: x, y, a, b
+
+	7) Object 클래스 : 모든클래스의 조상
+		자바에서는 모든 클래스가 자동으로 Object 클래스를 상속받는다.
+		모든클래스는 Object 클랫의 멤버를 모두 사용할 수 있다.
+		Object 클래스는 11개의 메소드만 가지고 있다.
+
+		hashcode : 주소값을 int로 변환
+		toString 	: 문자열로 리턴 해줌
+		wait 	: 정지
+
+		Object만 상속받은 클래스를 단일 클래스 라 한다.
+
+2. 상속과 접근제어자
+	1) 부모 클래스의 private 멤버
+		오직 부모 안에서만 사용가능, 자식클래스 포함해서 다른 모든 클래스에서 접근X
+	2) 부모클래스의 default 멤버
+		같은 패키지라면 가능, 자식이라도 다른패키지면 접근X
+	3) 부모클래스의 public 멤버
+		모든 곳에서 접근 허용
+	4) 부모 클래스의 protected 멤버
+		같은 패키지의 속한 모든 클래스에서 접근 가능,
+		패키지 상관없이 자식이라면 어디서든 접근 가능.
+
+3. final 
+	1) final 클래스
+		클래스 앞에 붙으면, 상속할 수 없다. ( 부모가 될 수 없다.)
+		final class FinalClass {}
+		class A extends FinalClass {} --> X
+		
+	2) final 메소드 
+		매소드 앞에 붙으면, 오버라이딩 할 수 없음 선언함
+		class Super{
+			fanal void test () { AAA }
+		}
+		class Sub extends Super {	//	test()
+			@Override
+			void test () { BBB } --> X
+		}
+		
+	3) final 변수 : 상수
+		변수 앞에 붙으면, 상수가 된다.
+		상수는 한번 초기화 (값대입) 되면 값을 변경할 수 없다.
+		관례적으로 "상수명은 전체 대문자"로 작성한다.
+
+		final int ROW = 10;
+		ROW = 20; ----> X 수정 안됨!
+
+		final 키워드를 public static 과 함께 선언하면
+		프로그램 전체에서 사용할 수 있는 상수가 된다.
+		ex) public static final double PI = 3.14.....
+		
+	
