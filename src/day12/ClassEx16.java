@@ -51,6 +51,8 @@ public class ClassEx16 {
 		t.add();
 		Test2 tt = new Inter();
 		tt.func();
+		Hello h = new Inter();
+		h.xxx = 200;
 	}
 
 }
