@@ -1,6 +1,6 @@
 package day12;
 
-// 오버라이딩 다형성 
+// 오버라이딩 다형성 					// 링크드 리스트
 class ShapeClass {
 	ShapeClass next; // 다음에 올 데이터의 주소 저장할 변수 
 	ShapeClass() { next = null; }

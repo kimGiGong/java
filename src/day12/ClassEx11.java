@@ -11,7 +11,7 @@ class Product {
 }
 class Tv extends Product {
 	Tv() {
-		super(100);
+		super(100);				//자식은 무조건생성자를 만들어야함 
 	}
 	@Override
 	public String toString() {

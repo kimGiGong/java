@@ -30,7 +30,7 @@ class StringStack implements Stack{
 	private String [] stack;
 	
 	public void setStackSaveN() { stackSaveN = Integer.parseInt(sc.nextLine()); }
-	public void setStackN(int i) { stackN+=i; }
+	public void setStackPlusN(int i) { stackN+=i; }
 	
 	public int length() {
 		return stackN;
@@ -41,13 +41,13 @@ class StringStack implements Stack{
 	public String pop() { 
 		String str = stack[length()-1];
 		stack[length()-1]= null;
-		setStackN(-1);
+		setStackPlusN(-1);
 		return str;
 	}
 	public boolean push(String val) {
 		if(length()<capacity()) {
 		stack[length()] = val;
-		setStackN(1);
+		setStackPlusN(1);
 		return true;
 		}else {
 		System.out.println("꽉참");
@@ -64,11 +64,11 @@ class StringStack implements Stack{
 		setStackSaveN();
 		stack= new String [stackSaveN]; 
 		while(true) {
-			System.out.println("문자열을 입력>>");
+			System.out.println("문자열을 입력(stop = 그만)>>");
 			String a = sc.nextLine();
 			if(a.equals("그만")) {
 				System.out.print("스택에 저장된 모든 문자열 팝 :");
-				int b=stackN;
+				int b=stackN;					// 스택갯수가 삭제하면 줄어들기에 저장
 				for (int i=0;  i<b ; i++) {
 				System.out.print(pop()+"  ");
 				}
@@ -77,6 +77,7 @@ class StringStack implements Stack{
 				push(a);
 			}
 		}
+		sc.close();
 	}
 }
 
