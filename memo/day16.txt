@@ -1,0 +1,186 @@
+[day16]
+
+1. 컬렉션 Collection
+	JDK는 소위 자료구조 과목에서 배우는 많은 자료 구조들을 컬렉션으로 만들어 제공
+	제네릭이라는 기법으로 구현. 		배열 : 자료의 정리 삽입 삭제 위치변경이 어렵다.
+	
+	
+	1) 컬렉션을 위한 자바 인터페이스와 클래스
+
+		      Collection<E>					Map<K, V>
+		/	|	     	＼
+	      Set<E>       List<E>		Queue<E>
+										인터페이스
+	---------------------------------------------------------------------------------------------------------
+	/		|    	 ＼  	      ＼  |		       	         |		클래스
+      HashSet<E>	     ArrayList<E>	Vector<E>  LinkedList<E>		HashMap<K, V>
+				    |
+		        	  	Stack<E>
+
+
+		[Collection]
+		- Vector, *ArrayList* : 가변크기의 배열			** : 많이 사용함
+		- LinkedList : 노드들이 링크로 연결되어 리스트
+		- Stack : 스택 
+		- HashSet : 집합 : 중복을 삭제함
+		[Map]
+		- *HashMap* : 키와 값의 쌍으로 저장되는 컬렉션
+		
+	2) 제네릭 (generics) 기법
+		JDK1.5 부터 도입된 제네릭 기법으로 컬렉션이 만들어짐.
+		컬렉션들 이름에 <E> <K> <V> 등이 포함 -> 타입매개변수 (generic type)
+		ArrayList<Integer>	-> 정수만 저장하는 ArrayList
+		ArrayList<String>	-> 문자열만 저장하는 ArrayList
+
+		특정타입만 다루지 않고 여러 종류의 타입으로 변신할 수 있도록 <E>을 사용
+		단, int, char, double 등 기본타입으로는 제네릭 사용 불가!!
+		-> Integer, Character, Double 등 Wrapper 클래스로 지정해줘야함.
+		ArrayList<int> ( X )	-> ArrayList <Integer>
+
+		ex) 제네릭 타입을 가진 클래스
+		class Stack<E> {
+			.....
+			void push(E element) { ..... }
+			E pop() { ...... }
+			.....
+		}
+
+		E에 대한 구체적인 타입을 지정하면 지정된 타입만 다룰 수 있는 구체화된 스택이된다.
+		-> 정수 스택 Stack<Integer>
+			void push(Integer element) { ....... }
+			Integer pop() { ..... }
+		-> 문자열 스택 Stack<String>
+			void push (String element) { ....... }
+			String pop() { ...... }
+		-> Tv 스택 Stack<Tv>
+			void push (Tv element) { .... }
+			Tv pop() { ...... }
+
+		E : element 요소
+		T : type
+		V : value
+		K : key
+				
+	3) ArrayList<E> : java.util.ArrayList
+		: 가변 크기의 배열을 구현, Vector와 거의 동일.
+		삽입되는 요소의 갯수에 따라 자동으로 크기 조절.
+		요소 삽입/삭제에 따라 요소들의 자리 이동도 자동으로 처리.
+
+		# 주요 메서드
+		boolean		add(E elem)		: 맨뒤에 elem추가
+		void		add(int idx,E elem)		: idx위치에 elem추가
+		boolean 		addAll(Collection c)		: 컬렉션 c의 모든 요소를 뒤에 추가
+		void 		clear()			: 모든 요소 삭제
+		E		remove(int idx)		: idx 위치 요소 하나 삭제
+		boolean 		remove(Object o)		: o와 같은 요소 삭제
+		E 		get(int idx)		: idx 위치 요소 리턴
+		boolean		contains(Object o)		: o를 포함하고 있으면 true
+		int 		indexOf(Object o)		: o 와 같은 요소가 저장된 첫 인덱스 리턴,
+							  없으면 -1 리턴
+		boolean		isEmpty()			: ArrayList 가 비어있으면 true
+		int		size()			: 저장된 요소의 갯수 리턴
+		Object[]		toArray()			: 저장된 요소를 배열로 리턴
+
+	4) 제네릭 없이 사용
+		제네릭 없이 사용하면 다양한 타입의 요소를 같이 저장가능.
+		제네릭을 지정하지 않았기 때문에
+		모든 객체의 최상위 클래스인 Object형으로 처리된다.
+
+	5) Vector<E> : java.util.Vector<E>
+		: 가변 배열 구조, ArrayList와 거의 동일
+		 Vector는 스레드간 동기화 지원O , ArrayList는 스레드간 동기화 지원X
+
+		# 주요 메서드
+		boolean		add(E elem)		: 맨뒤에 elem추가
+		void		add(int idx,E elem)		: idx위치에 elem추가
+		boolean 		addAll(Collection c)		: 컬렉션 c의 모든 요소를 뒤에 추가
+		void 		clear()			: 모든 요소 삭제
+		void		removeAll()		: 모든 요소 삭제
+		E		remove(int idx)		: idx 위치 요소 하나 삭제
+		boolean 		remove(Object o)		: o와 같은 요소 삭제
+		E		elementAt(int idx)		: idx 위치 요소 리턴
+		E 		get(int idx)		: idx 위치 요소 리턴
+		E		set(int idx, Object o)	: idx 위치 요소를 o로 수정하고, 수정 전의 값 리턴
+		boolean		contains(Object o)		: o를 포함하고 있으면 true
+		int 		indexOf(Object o)		: o 와 같은 요소가 저장된 첫 인덱스 리턴,
+							  없으면 -1 리턴
+		boolean		isEmpty()			: Vector 가 비어있으면 true
+		int		size()			: 저장된 요소의 갯수 리턴
+		Object[]		toArray()			: 저장된 요소를 배열로 리턴
+
+
+	6) Iterator<E> : java.util.Iterator<E> 인터페이스	: 반복자
+		: Vector, ArrayList 등과 같이 컬렉션에 저장된 요소를
+		 순차적으로 검색할때 사용하면 편리함.
+
+		# 주요 메서드
+		boolean		hasNext()		: 다음 요소가 있으면 true
+		E		next()		: 다음 요소를 리턴
+		void		remove()		: 리턴된 요소 제거
+
+	7) HashMap<K, V> : java.util.HashMap	은행 보안카드
+		: 키(Key)와 값(Value)의 쌍으로 구성되는 요소들을 저장할 수 있는 자료구조.
+		 K는 키로 사용할 데이터의 타입, V는 값으로 저장할 데이터의 타입을
+		 제네릭으로 명시한다.
+		-> index 가 없다. index 대신 key값으로 value를 꺼내옴
+		-> index 를 사용자가 원하는 값으로 지정하는 사용자 지정 index 라고 할 수도 있다.
+		-> key값 중복 허용 안되고, 순서가 없다.
+
+		# 장단점
+		- 삽입, 삭제 시간이 매우 빠르다.
+			위치를 결정하는 해쉬함수가 간단한 코드로 구성되어있고,
+			Vector나 ArrayList 처럼 삽입, 삭제시 요소 위치 이동이 필요없기 때문
+		- 검색은 더욱 빠름
+			해쉬 함수가 key저장 위치를 바로 찾기 때문에
+			Vector나 ArrayList처럼 모든 요소를 하나씩 비교하는 시간 낭비가 없다.
+
+		# 주요 메서드
+		V		put(K key,V value)		: key와 value 쌍으로 데이터 저장
+		V		get(Object key)		: 키에 해당하는 value 값 리턴 , 없으면 null 리턴
+		V		remove(Object key)		: 키를 찾아 key+value 삭제
+		void 		clear()			: 모든 요소 삭제
+		int		size()			: 요소의 갯수 리턴
+		boolean		isEmpty()			: 요소가 하나도 없으면 true
+		Set<K>		keySet()			: 모든 키들만 담아 Set<K> 타입으로 리턴
+		boolean		containsKey(Object key)	: key를 포함하고 있으면 true
+		boolean		containsValue(Object Value)	: value에 일치하는 값이 있으면 true
+		
+	8) LinkedList<E> : java.util.LinkedList	 Interface : List
+		: 요소들을 양방향으로 연결하여 관리한다는 점을 제외하고는
+		  Vector, ArrayList와 거의 같다.
+		  맨 앞과 맨 뒤를 가르키는 head, tail 레퍼런스 가지고 있다.
+
+	9) Stack<E>  : java.util.Stack 		super : Vector
+		: Vector의 자식 클래스.
+		제한적으로 접근할 수 있는 나열식 구조로, 접근 방법은 마지막에서만 접근가능
+		LIFO (Last In First Out)
+
+		Queue<E> : FIFO(First In First Out)
+		
+	10) Set<E> 인터페이스 -> HashSet<E> 구현 클래스
+		: 순서가 없고 , 중복 데이터가 없는 컬렉션.
+		-> 동일한 값을 저장할 수 없다.
+
+	11) Properties :	java.util.Properties	 
+		: HashMap의 구버전인 HashTable을 상속받아 구현한 클래스
+		K, V 형태로 데이터를 저장 (K = String , V = String)
+		주로 어플리케이션의 환경 설정과 관련된 속성을 저장하는데 사용한다.
+
+		.properties 확장자를 가진 파일의 내용을 읽어들이때 유용한 클래스.
+
+		# 주요 메서드
+		String 	getProperty(String key)		: 키주고 값 꺼내기
+		Object	setProperty(String key, String Value)	: 키,밸류 세트로 데이터추가	
+		void	load(InputStream inStream)		: 외부파일을 스트림으로 읽은것
+							  k,v형태로 로딩함
+		
+
+	
+	C Create  : 생성	: add()
+	R Read	: 읽기	: get()
+	U Update	: 수정
+	D Delete 	: 삭제 	: remove()
+
+
+
+
