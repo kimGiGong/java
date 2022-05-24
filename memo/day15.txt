@@ -1,0 +1,220 @@
+[day15]
+
+1. 패키지 package 
+	: 폴더 , 디렉토리 : 서로 관련 있는 클래스나 컴파일된 클래스 파일들을 한 곳에
+	묶어 놓은것. JDK는 개발자에게 많은 클래스파일들을 패키지 형태로 제공
+	.jar 압축파일로 제공됨.
+
+	1) 클래스 명
+		클래스를 지칭 할 때는 패키지명을 포함하는 경로명을 사용한다.
+		패키지와 클래스사이는 점(.) 연산자로 표현
+		java.lang.Object
+
+	2) 패키지 필요성
+		소스파일을 목적에 맞게 구조적으로 관리하여 
+		유지보수가 편하게 한다.
+
+	3) 패키지 사용
+		기본적으로 클래스 사용시, 패키지 명을	포함한 전체 경로명을 기술해야한다.
+
+		ex) Scanner
+		java.util.Scanner sc =new java.util.Scanner(System.in);
+
+	4) import 문
+		import 패키지.클래스명;
+		한패키지에 있는 여러 클래스들을 import 하고자 하는경우,
+		import 패키지명.*;
+		위와같이 클래스명 대신 * 을 사용하여 선언가능
+		* : 모든~~
+
+		ex)
+		import java.util.Scanner;
+
+	5) package 만들기
+		package 패키지명;
+
+		이 클래스는 저 패키지 안에 포함되어있다!
+		
+		default package : package 선언하지 않을 경우 현재 디렉토리를 인지함
+
+	
+		Scanner sc = new Scanner(System.in);
+
+2. API Application Programming Interface
+	: 자바에서도 제공해주는 기본패키지 : Java API
+	JDK 설치하면 개발자들이 사용할 수 있도록 오라클에서 미리 만들어놓은
+	많은 클래스들을 패키지로 제공한다.
+
+	1) API 문서
+	#Java SE (Standard Edition)
+	https://docs.oracle.com/en/java/javase/11/docs/api/
+	#Java EE ( 웹 )
+	docd.oracle.com/javaee/7/api/toc.htm			( javaEE 7 )
+	https://javaee.github.io/javaee-spec/javadocs/		( javaEE 8 )
+
+	2) API
+	java.awt : GUI 관련 클래스
+	java.beans : == 컴포넌트 클래스
+	java.io : input/output ( I/O )
+	java.lang : 기본패키지 *
+	java.math : 기본연산이외에 더 큰 다양한 연산등이 필요한 때
+	java.net : 네트워크 관련
+	java.nio : new I/O
+	java.security : 보안관련
+	java.sql  : 데이터 베이스 관련
+	java.text : 글자관련
+	java.util : 배열을 대신하는 클래스 이곳에 위치 . 날짜, 벡터, 해시맵, 간단한 입출력등
+
+	javax.~~ : 서포트하는 클래스
+	
+	그 외,
+	구글 API
+	네이버 API : https://developers.naver.com/main/
+	카카오 API : https://developers.kakao.com/
+	공공데이터 포털 : www.data.go.kr : 데이터 자료 사이트
+
+3. java.lang
+	import 필요없음.
+	System을 비롯하여 문자열, 수학함수, 입출력등 과 같이
+	자바 프로그래밍에 필요한 기본적인 클래스와 인터페이스를 제공한다.
+	
+	1) Object 클래스 : 최상위 클래스
+		모든 클래스의 조상, 모든 클래스에 강제로 상속되는 부모.
+	Module : java.base/ Package : java.lang / class : Object
+
+		clone() : 객체를 복사
+		equals​(Object obj) : 현재 주소값과 동일한지 여부를 알려줌
+		getClass : 현재 부르고 있는 클래스 보여주기
+		hashCode() : 주소값
+		notify() : 잠자고 있는 스래드를 활성화 해줌
+		notifyAll() : 모든~
+		toString() : 객체정보를 (16진수) 문자열로 리턴
+		wait() : 스래드 중단 및 대기 시킴
+
+		# 주요 메서드
+		   String		toString()
+		   boolean	equals(Object obj)
+
+	2) String 클래스
+		문자열 클래스	// 단일 클래스(오브젝트만 상속받음)
+		스트링 리터럴은 자바 컴파일러에 의해 모두 String 객체로 처리
+		public 'final' class String	상속불가능
+
+		#1. 생성자 
+		String() 		: 기본 생성자, 빈 스트링객체 생성
+		String(String org) 	: String타입의 문자열 저장하면서 객체 생성
+		String(char[] value)	: char 배열의 문자들을 스트링객체로 생성
+		String(StringBuffer buffer) : 스트링버퍼 문자열을 스트링객체 생성
+
+	3) 스트링리터널과 new String()
+		스트링리터널과 new String() 으로 생성된 객체는 서로 다르게 관리된다.
+		스트링리터널  : String str = "hello";
+			-> 자바 내부에서 리터럴 테이블로 특별 관리하여 동일한 리터럴 공유함.
+		new String()    : String str = new String("hello");
+			-> new로 생성된 스트링은 다른 객체와 동일하게 heap메모리에 생성
+
+		#2. 주요 메서드
+		
+	4) 스트링객체 수정 불가능
+		리터럴이던, new String() 이던 수정불가
+		수정 => 스트링 객체 만들어서 덮어쓰기
+		
+	5) String 주요 메서드
+		리턴타입	메서드명			설명
+		char	charAt(int index)		: index에 있는 문자 값 char 로 리턴
+		boolean	equarls(String str)		: 문자열 비교
+		int	compareTo(String other)	: 두 문자열을 사전순으로 비교, 같으면 0, 
+						  현재 문자열이 먼저 나오면 음수, 아니면 양수리턴
+		String 	concat(String str)		: 현재 문자열 뒤에 str 매개변수 문자열 이어준
+						  새로운 문자열 리턴
+		boolean 	contains(CharSequence s)	: s에 지정된 문자를 포함하면 true, 포함 안하면 false
+						  (CharSequence s : 부모객체 이므로 char OR String)
+		int	length()			: 문자열 길이 리턴
+		String	replace (CharSequence target,	: target 을 replacement로 변경한 문자열 리턴 
+			 CharSquence replacement)	  (h'e'llo) 을 a로(hallo) 변경
+		String[]	split(String regex)		: regen 정규식에 일치하는 부분을 구분자로
+						  문자열을 분할하여 배열로 리턴
+		String	subString(int beginIdx) 	: beginIdx 인덱스번호부터 끝까지 문자열을
+						  잘라서 리턴 
+		String 	toLowerCase()		: 전체 소문자로 변경해 리턴
+		String	toUpperCase()		: 전체 대문자로 변경해 리턴
+		String	trim()			: 문자열 앞뒤 공백 제거하고 문자열 리턴
+		
+	6) StringBuffer 클래스
+		문자열 다루는 클래스
+		String과 다르게 StringBuffer 객체는 문자열을 저장하는 가변 버퍼를 가지고 있다.
+		문자열 수정 가능.	String과 비슷한 메서드 구성
+
+	7) Wrapper 클래스	***
+		: Wrapper라는 이름의 클래스는 존재하지 않음.
+		int, char, double등 8개의 기본형을 객체로 다루기 위해
+		JDK에 만들어진 8개의 클래스를 통칭해서 Wrapper 클래스라 함.
+
+		기본타입 	: byte short  int 	long char	        float double boolean
+		Wrapper 	: byte Short Integer Long Character Float Double Boolean
+
+		#1. 객체 생성
+		클래스명 참조변수명 = new 클래스명(값);
+
+		#2. 주요메서드
+		리턴타입		클래스명			 설명
+		static int 		parseInt(String s)		: 문자열을 10진수로 변경
+		static int		parseInt(String s, int radix)	: s를 radix 진법 정수로 변경한 값을 리턴
+		static String 	toBinaryString(int i)		: 2진수로 변환한 문자열 리턴
+		static String 	toHexString(int i)		: 16진수로 변환한 문자열 리턴
+		static String	toOctalString(int i)		: 8진수로 변환한 문자열 리턴
+		static String 	toString(int i)		: 문자열로 리턴
+
+		float		floatValue()		: float으로 리턴
+		int		intValue()			: int 로 리턴
+		long		longValue()		: long으로 리턴
+		short		shortValue()		: short로 리턴
+		
+		#3. 박싱 / 언박싱
+				박싱
+			Integer ten = new Integer(10);
+		int -------------------------------------------> Integer 객체
+		10 <--------------------------------------------	10
+			int n = ten.intValue();
+				언박싱
+
+	8) Math 클래스
+		: 수학 관련 클래스
+		모든 메서드가 static 타입으로 객체생성없이 바로 사용가능하다.
+		Math.메서드명();
+
+
+4. java.util
+	1) Calendar 클래스
+		: 추상클래스
+		년, 월, 일, 요일, 시간, 분, 초 ,밀리초, 등을 get(),set() 메서드 이용하여 저장하거나
+		알아 낼 수있는 클래스
+		1970.1.1.0.0.0 을 기준으로
+
+		#1. 객체 생성 X 
+			getInstance() 메서드를 통해 Calendar 얻어와 사용
+
+		#2. Calendar의 get() , set() 메서드에 사용되는 상수
+			YEAR			: 년도
+			DAY_OF_MONTH		: 한달의 날짜
+			MONTH			: 달 (0~11)
+			DAY_OF_WEEL		: 한주의 요일
+			HOUR			: 시간 | 
+			AM_PM			: 오전 오후
+			HOUR_OF_DAY		: 24시간 기준으로한 시간
+			MINUTE			: 분
+			SECOND			: 초
+			MILLISECOND		: 밀리초 ( 1s = 1000ms )
+
+		#3. Gregorian Calendar 클래스
+			1970.1.1.0.0.0을 기준으로 365.25일 4년에 1번씩 윤달이 있음
+			
+	2) Date 클래스
+		: 단일 클래스로 날짜/시간 관련 클래스
+		1900.1.1.0.0.0을 기준,
+		1970.1.1.0.0.0을 기준 둘다 가능.
+
+		
+
+
+
