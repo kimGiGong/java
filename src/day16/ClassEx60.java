@@ -41,7 +41,15 @@ public class ClassEx60 {
 		System.out.println(val);
 		String val2 = map.get("melon");	//없으면 null 리턴
 		System.out.println(val2);
-		
+		System.out.println("15615645");
+		System.out.println(map.keySet());
+		String arr = map.keySet().toString();
+		arr = arr.replace("[", "");
+		arr = arr.replace("]", "");
+		String arrr[] = arr.split(",");
+		for(int i = 0;i<arrr.length;i++) {
+			System.out.println(arrr[i].trim());
+		}
 		//	요소 삭제 : 키값 주고 삭제
 		map.remove("peach");
 		System.out.println(map);
