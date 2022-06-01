@@ -15,11 +15,6 @@ class StudentClass{
 	String stuNum;
 	double result;
 	
-	@Override
-	public String toString() {
-		String re = Double.toString(result);
-		return "이름:"+name+"\r\n학과:"+department+"\r\n학번:"+stuNum+"\r\n학점평균:"+re;
-	}
 }
 	
 
@@ -86,7 +81,10 @@ public class Test08Ex {
 	void print () {
 		for(int i=0 ;i<al.size();i++) {
 			System.out.println("------------------------");
-			System.out.println(al.get(i).toString()); 
+			System.out.println("이름 : "+al.get(i).name); 
+			System.out.println("학과 : "+al.get(i).department); 
+			System.out.println("학번 : "+al.get(i).stuNum); 
+			System.out.println("평균학점 : "+al.get(i).result); 
 		}
 		System.out.println("-------------------------");
 	}
@@ -118,6 +116,7 @@ public class Test08Ex {
 				break;
 			}
 		}
+		sc.close();
 	}
 
 	public static void main(String[] args) {
