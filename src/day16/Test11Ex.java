@@ -1,7 +1,17 @@
 package day16;
+
+import java.util.ArrayList;
+
+class Nation{
+	String contry, capital;
+}
+class CapitalGame{
+	ArrayList<Nation> nation = new ArrayList<Nation>();
+}
 /*
-	나라와 수도 맞추기 게임을 만들어 보세요. (코드 하나도 없는 문제)
-	1) 나라이름(country)과 수도(capital)로 구성된 Nation클래스를 작성하고,
+	나라와 수도 맞추기 게임을 만들어
+	 보세요. (코드 하나도 없는 문제)
+ 	1) 나라이름(country)과 수도(capital)로 구성된 Nation클래스를 작성하고,
 		ArrayList<Nation> 컬렉션을 이용하여 아래 실행 예시와 같이 작동되도록 프로그램을 작성하세요.
 	실행예시:
 		** 수도 맞추기 게임을 시작합니다 **

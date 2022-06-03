@@ -1,6 +1,8 @@
-package day16;
+ package day16;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Test04Ex {
@@ -40,6 +42,16 @@ public class Test04Ex {
 			sum += hm.get(arr[i]);
 		}
 		return sum/hm.size();
+	}
+	private void printAvg() {
+		Collection<Double> col = hm.values();	//	map에서 값들만 뽑아줌
+		Iterator<Double> it = col.iterator();
+		double sum =0;
+		while(it.hasNext()) {
+			sum+= it.next();		// 값하나씩 꺼내서 sum에 누적 하기
+		}
+		double avg = (double)sum/hm.size();
+		System.out.println("평균점수>> "+avg);
 	}
 	public void run(){
 		while(true) {

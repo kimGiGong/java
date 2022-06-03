@@ -26,9 +26,9 @@ class Scholarship{
 	void insert() {
 		int i=0;
 		while(i<5) {
-		System.out.print("이름과 학점>>");
-		hm.put(sc.next(), sc.nextDouble()); sc.nextLine();
-		i++;
+			System.out.print("이름과 학점>>");
+			hm.put(sc.next(), sc.nextDouble()); sc.nextLine();
+			i++;
 		}
 	}
 	void select() {

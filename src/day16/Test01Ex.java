@@ -11,12 +11,6 @@ import java.util.Vector;
 		가장 큰 수는 88
 */
 
-
-
-
-
-
-
 public class Test01Ex {
 	
 	public static void main(String[] args) {
@@ -26,10 +20,15 @@ public class Test01Ex {
 		while (true) {
 			System.out.print("정수입력>>");
 			a=sc.nextInt();
+			
 			if(a>=-1){
 				if(-1==a) {
 					int max=0;
 					System.out.print("정수 >>");
+					if(vi.size()==0) {
+						System.out.println("하나도 없다.");		//  바로 -1 입력시 정수 없음
+						break;
+					}
 					for(int i=0; i<vi.size();i++) {
 						int j=vi.get(i);
 						System.out.print(j+" ");
@@ -50,6 +49,6 @@ public class Test01Ex {
 			}
 			
 		}
-		
+		sc.close();
 	}
 }

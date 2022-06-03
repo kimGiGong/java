@@ -1,5 +1,6 @@
 package day16;
 
+import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -23,6 +24,16 @@ import java.util.Vector;
 		프로그램 종료!
 */
 public class Test07Ex {
+	private static String printVector(Vector<Integer> v) {
+		Iterator<Integer> it = v.iterator();
+		String sum = "";
+		while(it.hasNext()) {
+			int a =it.next();
+			System.out.println();
+			sum += a+" ";
+		}
+		return sum ;
+	}
 	
 	public static void main(String[] args) {
 		
@@ -33,10 +44,10 @@ public class Test07Ex {
 		int water = -1;
 		while(true) {
 			System.out.println("강수량 입력 (0 입력시 종료)>>");
-			water = Integer.parseInt(sc.next());
+			water = Integer.parseInt(sc.next().trim());
 			if(water!=0) {
 				v.add(water);
-				System.out.println(water);
+				System.out.println(printVector(v));
 				tot+=water;
 				System.out.println("강수량 평균"+tot/v.size());
 			}else {
@@ -46,6 +57,11 @@ public class Test07Ex {
 		}
 			
 		sc.close();
+		
+	}
+
+	private static void iterator() {
+		// TODO Auto-generated method stub
 		
 	}
 }

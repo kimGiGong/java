@@ -29,13 +29,15 @@ public class Test06Ex {
 		System.out.println("나라 이름과 인구를 입력하세요.(예: Korea 5000)");
 		while(true) {
 			System.out.print("나라 이름, 인구 >>");
-			String stop=sc.next();
+			String stop=sc.next();	//	.split 을 통해 " " 으로 분할하여 배열로 받기도 가능
 			if(!stop.equals("그만")) {
 				long population = sc.nextInt();
 			nations.put(stop, (int) population);
+			//	Integer popul = nations.get(stop); 	//	map의 get(키값) 은 해당 키밸류가 없으면 null 리턴
+			//	null값을 받기위해 클래스 Integer로 받는다.
 			}else {
 				break;
-			}
+			}	
 		}
 		while(true) {
 			System.out.print("인구 검색 >>");

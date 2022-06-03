@@ -27,6 +27,7 @@ public class Test09Ex {
 	void print () {
 		
 		String[] key = hm.keySet().toArray(new String [hm.keySet().size()]);
+		System.out.println("저장순서가 보장되지않음");
 		for(int i=0 ;i<hm.size();i++) {
 			System.out.println("------------------------");
 			System.out.println("이름 : "+hm.get(key[i].toString()).name); 
@@ -60,7 +61,7 @@ public class Test09Ex {
 		}
 		sc.close();
 		System.out.println("프로그램종료!");
-		System.out.println("저장순서가 보장되지않음");
+		
 	}
 	
 	public static void main(String[] args) {
